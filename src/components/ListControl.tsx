@@ -1,11 +1,13 @@
 import { useState } from 'react';
 
 interface IListControlProps {
-  addTodo: AddTodo;
+  addTodo: AddTodoType;
+  todoView: TodoViewType;
 }
 
-const ListControl = ({ addTodo }: IListControlProps) => {
+const ListControl = ({ addTodo, todoView }: IListControlProps) => {
   const [text, setText] = useState('');
+
   return (
     <>
       <form>
@@ -26,9 +28,15 @@ const ListControl = ({ addTodo }: IListControlProps) => {
           +
         </button>
       </form>
-      {/* <input type='radio' value='all' /> All
-      <input type='radio' value='all' /> To Do
-      <input type='radio' value='all' /> Done */}
+      <div
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          todoView(e.target.value)
+        }
+      >
+        <input type="radio" value="all" name="view" defaultChecked /> All
+        <input type="radio" value="todo" name="view" /> To Do
+        <input type="radio" value="done" name="view" /> Done
+      </div>
     </>
   );
 };

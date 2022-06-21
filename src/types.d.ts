@@ -4,11 +4,17 @@ interface ITodo {
   complete: boolean;
 }
 
+interface IList {
+  cards: Item[];
+}
+
 type ToggleTodoType = (selectedTodo: ITodo) => void;
 
-type AddTodo = (text: string) => void;
+type AddTodoType = (text: string) => void;
 
-type DeleteTodo = (todo) => void;
+type DeleteTodoType = (todo: ITodo) => void;
+
+type TodoViewType = (todoView: string) => void;
 
 // interface IList {
 //   todo: {
