@@ -3,6 +3,11 @@ import TodoItem from './TodoItem';
 import ListControl from './ListControl';
 import update from 'immutability-helper';
 
+interface IListProps {
+  listName: string;
+  deleteList: DeleteListType;
+}
+
 const initialTodos: ITodo[] = [
   {
     id: 123,
@@ -16,7 +21,7 @@ const initialTodos: ITodo[] = [
   },
 ];
 
-const List = () => {
+const List = ({ listName, deleteList }: IListProps) => {
   const [todos, setTodos] = useState(initialTodos);
   const [view, setView] = useState('all');
 
@@ -31,19 +36,6 @@ const List = () => {
     );
   }, []);
 
-  const toggleTodo = (selectedTodo: ITodo) => {
-    const newTodos = todos.map((todo) => {
-      if (todo === selectedTodo) {
-        return {
-          ...todo,
-          complete: !todo.complete,
-        };
-      }
-      return todo;
-    });
-    setTodos(newTodos);
-  };
-
   const addTodo: AddTodoType = (text: string) => {
     const newTodo = { id: Number(Date.now()), text, complete: false };
     setTodos([...todos, newTodo]);
@@ -57,8 +49,6 @@ const List = () => {
   };
 
   const todoView = (chosenview: string) => {
-    console.log(view);
-
     setView(chosenview);
   };
 
@@ -68,6 +58,18 @@ const List = () => {
       index: number,
       view: string
     ) => {
+      const toggleTodo = (selectedTodo: ITodo) => {
+        const newTodos = todos.map((todo) => {
+          if (todo === selectedTodo) {
+            return {
+              ...todo,
+              complete: !todo.complete,
+            };
+          }
+          return todo;
+        });
+        setTodos(newTodos);
+      };
       return (
         <TodoItem
           key={item.id}
@@ -83,12 +85,17 @@ const List = () => {
         />
       );
     },
-    []
+    [moveCard, todos]
   );
 
   return (
     <>
-      <ListControl addTodo={addTodo} todoView={todoView} />
+      <ListControl
+        addTodo={addTodo}
+        todoView={todoView}
+        listName={listName}
+        deleteList={deleteList}
+      />
       <ul>
         <div>{todos.map((item, i) => renderCard(item, i, view))}</div>
       </ul>

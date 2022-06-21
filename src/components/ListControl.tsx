@@ -1,15 +1,33 @@
 import { useState } from 'react';
+// import AlertDialog from './Alert';
 
 interface IListControlProps {
+  listName: string;
   addTodo: AddTodoType;
   todoView: TodoViewType;
+  deleteList: DeleteListType;
 }
 
-const ListControl = ({ addTodo, todoView }: IListControlProps) => {
+const ListControl = ({
+  listName,
+  addTodo,
+  todoView,
+  deleteList,
+}: IListControlProps) => {
   const [text, setText] = useState('');
 
   return (
     <>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          // <AlertDialog />;
+          deleteList(listName);
+        }}
+      >
+        X
+      </button>
+      <h1>{listName}</h1>
       <form>
         <input
           type="text"
