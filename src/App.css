@@ -70,5 +70,11 @@ button {
 
 .item__close {
   position: absolute;
-  right: 1rem;
+  right: -1rem;
+}
+
+.item__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

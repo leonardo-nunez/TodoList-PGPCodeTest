@@ -112,27 +112,28 @@ const TodoItem = ({
       data-handler-id={handlerId}
     >
       <label
-        className="item__content"
         style={{
           textDecoration: todo.complete ? 'line-through' : undefined,
         }}
       >
-        <input
-          className="item__checkbox"
-          type="checkbox"
-          checked={todo.complete}
-          onChange={() => toggleTodo(todo)}
-        />{' '}
-        {text}{' '}
-        <IconButton
-          className="item__close"
-          onClick={(e) => {
-            e.preventDefault();
-            deleteTodo(todo);
-          }}
-        >
-          <CloseIcon />
-        </IconButton>
+        <div className="item__content">
+          <input
+            className="item__checkbox"
+            type="checkbox"
+            checked={todo.complete}
+            onChange={() => toggleTodo(todo)}
+          />
+          <div className="item__text">{text}</div>
+          <IconButton
+            className="item__close"
+            onClick={(e) => {
+              e.preventDefault();
+              deleteTodo(todo);
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        </div>
       </label>
     </div>
   );
