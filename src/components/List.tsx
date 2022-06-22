@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import TodoItem from './TodoItem';
 import ListControl from './ListControl';
 import update from 'immutability-helper';
@@ -7,11 +7,37 @@ interface IListProps {
   listName: string;
   listId: number;
   deleteList: DeleteListType;
+  lists: IList[];
+  setLists: React.Dispatch<React.SetStateAction<IList[]>>;
 }
 
-const List = ({ listId, listName, deleteList }: IListProps) => {
+const List = ({
+  setLists,
+  lists,
+  listId,
+  listName,
+  deleteList,
+}: IListProps) => {
   const [todos, setTodos] = useState<ITodo[]>([]);
   const [view, setView] = useState('all');
+
+  useEffect(() => {
+    // setLists(prev => {
+    //   const filtered = prev.filter((l) => l.id !== listId);
+    //   const thisList = prev.filter((l) => l.id === listId);
+    //   const thisListUpdated = {...thisList, todos: todos}
+    //       return [...filtered, thisListUpdated ];
+
+    // })
+
+    const newLists = lists.map((list) => {
+      if (list.id === listId) {
+        return { ...list, todos: todos };
+      }
+      return list;
+    });
+    setLists(newLists);
+  }, [todos, lists, listId]);
 
   const moveCard = useCallback((dragIndex: number, hoverIndex: number) => {
     setTodos((prev: ITodo[]) =>

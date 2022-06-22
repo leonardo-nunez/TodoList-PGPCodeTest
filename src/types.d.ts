@@ -7,6 +7,7 @@ interface ITodo {
 interface IList {
   id: number;
   name: string;
+  todos: ITodo[];
 }
 
 type ToggleTodoType = (selectedTodo: ITodo) => void;

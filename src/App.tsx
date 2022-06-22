@@ -6,13 +6,6 @@ import NavBar from './components/NavBar';
 
 import './App.css';
 
-// const initialList = [
-//   {
-//     id: 1,
-//     name: 'first List',
-//   },
-// ];
-
 function App() {
   const [lists, setLists] = useState<IList[]>([]);
   const [newListName, setNewListName] = useState('');
@@ -21,7 +14,7 @@ function App() {
   // let navigate = useNavigate();
 
   const addList: AddListType = (name: string) => {
-    const newList = { id: Number(Date.now()), name };
+    const newList = { id: Number(Date.now()), name, todos: [] };
     setLists([...lists, newList]);
     // navigate(`lists/${newList.name}`);
   };
@@ -48,6 +41,8 @@ function App() {
           listName={list.name}
           listId={list.id}
           deleteList={deleteList}
+          lists={lists}
+          setLists={setLists}
         />
       ))}
       {/* <Routes>
@@ -58,6 +53,8 @@ function App() {
               listName={lists[routeIndex].name}
               listId={lists[routeIndex].id}
               deleteList={deleteList}
+              lists={lists}
+              setLists={setLists}
             />
           }
         ></Route>
