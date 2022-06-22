@@ -89,7 +89,7 @@ const List = ({ listName, deleteList }: IListProps) => {
   );
 
   return (
-    <>
+    <div className="list">
       <ListControl
         addTodo={addTodo}
         todoView={todoView}
@@ -99,7 +99,7 @@ const List = ({ listName, deleteList }: IListProps) => {
       <ul>
         <div>{todos.map((item, i) => renderCard(item, i, view))}</div>
       </ul>
-    </>
+    </div>
   );
 };
 

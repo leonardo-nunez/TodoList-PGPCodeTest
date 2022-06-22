@@ -1,14 +1,45 @@
+import { useState } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+
+import List from './components/List';
+import NavBar from './components/NavBar';
+
 import './App.css';
-import ListContainer from './components/ListContainer';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+
+const initialList: IList1[] = [
+  {
+    id: 1,
+    name: 'Todo List',
+  },
+];
 
 function App() {
+  const [lists, setLists] = useState(initialList);
+  const [listName, setListName] = useState('');
+
+  const addList: AddListType = (name: string) => {
+    const newList = { id: Number(Date.now()), name };
+    setLists([...lists, newList]);
+  };
+
+  const deleteList: DeleteListType = (listName) => {
+    setLists((prev) => {
+      const data = prev.filter((l) => l.name !== listName);
+      return data;
+    });
+  };
+
   return (
     <div className="App">
-      <DndProvider backend={HTML5Backend}>
-        <ListContainer />
-      </DndProvider>
+      <NavBar
+        lists={lists}
+        listName={listName}
+        setListName={setListName}
+        addList={addList}
+      />
+      {lists.map((list, index) => (
+        <List key={index} listName={list.name} deleteList={deleteList} />
+      ))}
     </div>
   );
 }
