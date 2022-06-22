@@ -5,19 +5,21 @@ interface INavBarProps {
   newListName: string;
   setNewListName: (value: string) => void;
   addList: AddListType;
+  setRouteIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 const NavBar = ({
   lists,
   newListName,
   setNewListName,
   addList,
+  setRouteIndex,
 }: INavBarProps) => {
   return (
     <div className="navbar">
       <div className="navbar__list">
         {lists.map((list, i) => (
           <Link key={i} to={`lists/${list.name}`}>
-            <button>{list.name}</button>
+            <button onClick={() => setRouteIndex(i)}>{list.name}</button>
           </Link>
         ))}
       </div>

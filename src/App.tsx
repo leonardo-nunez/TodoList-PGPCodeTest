@@ -9,6 +9,7 @@ import './App.css';
 function App() {
   const [lists, setLists] = useState<IList[]>([]);
   const [newListName, setNewListName] = useState('');
+  const [routeIndex, setRouteIndex] = useState(0);
 
   let navigate = useNavigate();
 
@@ -33,10 +34,8 @@ function App() {
       return list;
     });
 
-    // setLists(updatedLists);
+    setLists(updatedLists);
   };
-
-  const rendededList = () => {};
 
   return (
     <div className="App">
@@ -45,23 +44,26 @@ function App() {
         newListName={newListName}
         setNewListName={setNewListName}
         addList={addList}
+        setRouteIndex={setRouteIndex}
       />
-      <Routes>
-        {lists.map((list, index) => (
+      {lists !== [] && (
+        <Routes>
+          {/* {lists.map((list, index) => ( */}
           <Route
-            key={index}
-            path={`lists/${list.name}`}
+            // key={index}
+            path={`lists/${lists[routeIndex].name}`}
             element={
               <List
-                listName={list.name}
-                listId={list.id}
+                listName={lists[routeIndex].name}
+                listId={lists[routeIndex].id}
                 deleteList={deleteList}
                 updateListTodos={updateListTodos}
               />
             }
           ></Route>
-        ))}
-      </Routes>
+          {/* ))} */}
+        </Routes>
+      )}
     </div>
   );
 }
