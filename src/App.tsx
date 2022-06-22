@@ -6,20 +6,16 @@ import NavBar from './components/NavBar';
 
 import './App.css';
 
-const initialList: IList1[] = [
-  {
-    id: 1,
-    name: 'Todo List',
-  },
-];
-
 function App() {
-  const [lists, setLists] = useState(initialList);
-  const [listName, setListName] = useState('');
+  const [lists, setLists] = useState<IList[]>([]);
+  const [newListName, setNewListName] = useState('');
+
+  let navigate = useNavigate();
 
   const addList: AddListType = (name: string) => {
-    const newList = { id: Number(Date.now()), name };
+    const newList = { id: Number(Date.now()), name, todos: [] };
     setLists([...lists, newList]);
+    navigate(`lists/${newList.name}`);
   };
 
   const deleteList: DeleteListType = (listName) => {
@@ -29,17 +25,43 @@ function App() {
     });
   };
 
+  const updateListTodos: UpdateListTodosType = (listId, todos) => {
+    const updatedLists = lists.map((list) => {
+      if (list.id === listId) {
+        return { ...list, todos: todos };
+      }
+      return list;
+    });
+
+    // setLists(updatedLists);
+  };
+
+  const rendededList = () => {};
+
   return (
     <div className="App">
       <NavBar
         lists={lists}
-        listName={listName}
-        setListName={setListName}
+        newListName={newListName}
+        setNewListName={setNewListName}
         addList={addList}
       />
-      {lists.map((list, index) => (
-        <List key={index} listName={list.name} deleteList={deleteList} />
-      ))}
+      <Routes>
+        {lists.map((list, index) => (
+          <Route
+            key={index}
+            path={`lists/${list.name}`}
+            element={
+              <List
+                listName={list.name}
+                listId={list.id}
+                deleteList={deleteList}
+                updateListTodos={updateListTodos}
+              />
+            }
+          ></Route>
+        ))}
+      </Routes>
     </div>
   );
 }

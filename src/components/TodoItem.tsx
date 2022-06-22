@@ -5,7 +5,7 @@ import { useDrag, useDrop } from 'react-dnd';
 const style = {
   border: '1px dashed gray',
   padding: '0.5rem 1rem',
-  marginBottom: '.5rem',
+  margin: '.5rem',
   backgroundColor: 'white',
   cursor: 'move',
 };
@@ -19,7 +19,6 @@ interface ITodoItemProps {
   id: number;
   index: number;
   todo: ITodo;
-  complete: boolean;
   text: string;
   view: string;
   toggleTodo: ToggleTodoType;
@@ -38,7 +37,6 @@ const TodoItem = ({
   id,
   index,
   text,
-  complete,
   view,
   toggleTodo,
   deleteTodo,
@@ -109,9 +107,9 @@ const TodoItem = ({
       style={{
         ...style,
         display:
-          view === 'todo' && complete
+          view === 'todo' && todo.complete
             ? 'none'
-            : view === 'done' && !complete
+            : view === 'done' && !todo.complete
             ? 'none'
             : 'block',
         opacity,
@@ -120,15 +118,15 @@ const TodoItem = ({
     >
       <label
         style={{
-          textDecoration: complete ? 'line-through' : undefined,
+          textDecoration: todo.complete ? 'line-through' : undefined,
         }}
       >
         <input
           type="checkbox"
-          checked={complete}
+          checked={todo.complete}
           onChange={() => toggleTodo(todo)}
         />{' '}
-        {text}
+        {text}{' '}
         <button
           onClick={(e) => {
             e.preventDefault();

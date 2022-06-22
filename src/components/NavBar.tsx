@@ -1,30 +1,39 @@
+import { Link } from 'react-router-dom';
+
 interface INavBarProps {
-  lists: IList1[];
-  listName: string;
-  setListName: (value: string) => void;
+  lists: IList[];
+  newListName: string;
+  setNewListName: (value: string) => void;
   addList: AddListType;
 }
-const NavBar = ({ lists, listName, setListName, addList }: INavBarProps) => {
+const NavBar = ({
+  lists,
+  newListName,
+  setNewListName,
+  addList,
+}: INavBarProps) => {
   return (
     <div className="navbar">
       <div className="navbar__list">
         {lists.map((list, i) => (
-          <h4 key={i}>{list.name}</h4>
+          <Link key={i} to={`lists/${list.name}`}>
+            <button>{list.name}</button>
+          </Link>
         ))}
       </div>
       <form>
         <input
           type="text"
           placeholder="Add new List"
-          value={listName}
-          onChange={(e) => setListName(e.target.value)}
+          value={newListName}
+          onChange={(e) => setNewListName(e.target.value)}
         />
         <button
           type="submit"
           onClick={(e) => {
             e.preventDefault();
-            addList(listName);
-            setListName('');
+            addList(newListName);
+            setNewListName('');
           }}
         >
           +
