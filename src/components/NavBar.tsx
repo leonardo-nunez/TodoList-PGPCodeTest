@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom';
 
+import IconButton from '@mui/material/IconButton';
+import AddIcon from '@mui/icons-material/Add';
+
 interface INavBarProps {
   lists: IList[];
   newListName: string;
@@ -19,7 +22,9 @@ const NavBar = ({
       <div className="navbar__list">
         {lists.map((list, i) => (
           <Link key={i} to={`lists/${list.name}`}>
-            <button onClick={() => setRouteIndex(i)}>{list.name}</button>
+            <button className="navbar__button" onClick={() => setRouteIndex(i)}>
+              {list.name}
+            </button>
           </Link>
         ))}
       </div>
@@ -28,9 +33,10 @@ const NavBar = ({
           type="text"
           placeholder="Add new List"
           value={newListName}
+          required
           onChange={(e) => setNewListName(e.target.value)}
         />
-        <button
+        <IconButton
           type="submit"
           onClick={(e) => {
             e.preventDefault();
@@ -38,8 +44,8 @@ const NavBar = ({
             setNewListName('');
           }}
         >
-          +
-        </button>
+          <AddIcon />
+        </IconButton>
       </form>
     </div>
   );

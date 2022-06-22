@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import TodoItem from './TodoItem';
 import ListControl from './ListControl';
 import update from 'immutability-helper';
@@ -7,22 +7,11 @@ interface IListProps {
   listName: string;
   listId: number;
   deleteList: DeleteListType;
-  updateListTodos: UpdateListTodosType;
 }
 
-const List = ({
-  updateListTodos,
-  listId,
-  listName,
-  deleteList,
-}: IListProps) => {
+const List = ({ listId, listName, deleteList }: IListProps) => {
   const [todos, setTodos] = useState<ITodo[]>([]);
   const [view, setView] = useState('all');
-
-  useEffect(() => {
-    updateListTodos(listId, todos);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [todos, listId]);
 
   const moveCard = useCallback((dragIndex: number, hoverIndex: number) => {
     setTodos((prev: ITodo[]) =>

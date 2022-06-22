@@ -2,13 +2,8 @@ import type { Identifier, XYCoord } from 'dnd-core';
 import { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 
-const style = {
-  border: '1px dashed gray',
-  padding: '0.5rem 1rem',
-  margin: '.5rem',
-  backgroundColor: 'white',
-  cursor: 'move',
-};
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
 
 const ItemTypes = {
   CARD: 'card',
@@ -103,9 +98,9 @@ const TodoItem = ({
 
   return (
     <div
+      className="item"
       ref={ref}
       style={{
-        ...style,
         display:
           view === 'todo' && todo.complete
             ? 'none'
@@ -117,24 +112,27 @@ const TodoItem = ({
       data-handler-id={handlerId}
     >
       <label
+        className="item__content"
         style={{
           textDecoration: todo.complete ? 'line-through' : undefined,
         }}
       >
         <input
+          className="item__checkbox"
           type="checkbox"
           checked={todo.complete}
           onChange={() => toggleTodo(todo)}
         />{' '}
         {text}{' '}
-        <button
+        <IconButton
+          className="item__close"
           onClick={(e) => {
             e.preventDefault();
             deleteTodo(todo);
           }}
         >
-          X
-        </button>
+          <CloseIcon />
+        </IconButton>
       </label>
     </div>
   );

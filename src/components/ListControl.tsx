@@ -7,6 +7,10 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
+import IconButton from '@mui/material/IconButton';
+import AddIcon from '@mui/icons-material/Add';
+import CloseIcon from '@mui/icons-material/Close';
+
 interface IListControlProps {
   listName: string;
   addTodo: AddTodoType;
@@ -36,8 +40,10 @@ const ListControl = ({
   };
 
   return (
-    <>
-      <button onClick={handleClickOpen}>X</button>
+    <div className="control">
+      <IconButton className="control__close" onClick={handleClickOpen}>
+        <CloseIcon />
+      </IconButton>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -67,7 +73,7 @@ const ListControl = ({
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
-        <button
+        <IconButton
           type="submit"
           onClick={(e) => {
             e.preventDefault();
@@ -75,19 +81,38 @@ const ListControl = ({
             setText('');
           }}
         >
-          +
-        </button>
+          <AddIcon />
+        </IconButton>
       </form>
       <div
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           todoView(e.target.value)
         }
       >
-        <input type="radio" value="all" name="view" defaultChecked /> All
-        <input type="radio" value="todo" name="view" /> To Do
-        <input type="radio" value="done" name="view" /> Done
+        <input
+          className="control__radiobutton"
+          type="radio"
+          value="all"
+          name="view"
+          defaultChecked
+        />{' '}
+        All
+        <input
+          className="control__radiobutton"
+          type="radio"
+          value="todo"
+          name="view"
+        />{' '}
+        To Do
+        <input
+          className="control__radiobutton"
+          type="radio"
+          value="done"
+          name="view"
+        />{' '}
+        Done
       </div>
-    </>
+    </div>
   );
 };
 

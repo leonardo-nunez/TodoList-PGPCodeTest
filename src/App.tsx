@@ -6,17 +6,24 @@ import NavBar from './components/NavBar';
 
 import './App.css';
 
+// const initialList = [
+//   {
+//     id: 1,
+//     name: 'first List',
+//   },
+// ];
+
 function App() {
   const [lists, setLists] = useState<IList[]>([]);
   const [newListName, setNewListName] = useState('');
   const [routeIndex, setRouteIndex] = useState(0);
 
-  let navigate = useNavigate();
+  // let navigate = useNavigate();
 
   const addList: AddListType = (name: string) => {
-    const newList = { id: Number(Date.now()), name, todos: [] };
+    const newList = { id: Number(Date.now()), name };
     setLists([...lists, newList]);
-    navigate(`lists/${newList.name}`);
+    // navigate(`lists/${newList.name}`);
   };
 
   const deleteList: DeleteListType = (listName) => {
@@ -24,17 +31,6 @@ function App() {
       const data = prev.filter((l) => l.name !== listName);
       return data;
     });
-  };
-
-  const updateListTodos: UpdateListTodosType = (listId, todos) => {
-    const updatedLists = lists.map((list) => {
-      if (list.id === listId) {
-        return { ...list, todos: todos };
-      }
-      return list;
-    });
-
-    setLists(updatedLists);
   };
 
   return (
@@ -46,38 +42,26 @@ function App() {
         addList={addList}
         setRouteIndex={setRouteIndex}
       />
-      <Routes>
-        {lists.map((list, index) => (
-          <Route
-            key={index}
-            path={`lists/${list.name}`}
-            element={
-              <List
-                listName={list.name}
-                listId={list.id}
-                deleteList={deleteList}
-                updateListTodos={updateListTodos}
-              />
-            }
-          ></Route>
-        ))}
-      </Routes>
-      <Routes>
-        {lists.map((list, index) => (
-          <Route
-            key={index}
-            path={`lists/${list.name}`}
-            element={
-              <List
-                listName={list.name}
-                listId={list.id}
-                deleteList={deleteList}
-                updateListTodos={updateListTodos}
-              />
-            }
-          ></Route>
-        ))}
-      </Routes>
+      {lists.map((list, index) => (
+        <List
+          key={index}
+          listName={list.name}
+          listId={list.id}
+          deleteList={deleteList}
+        />
+      ))}
+      {/* <Routes>
+        <Route
+          path={`lists/${lists[routeIndex].name}`}
+          element={
+            <List
+              listName={lists[routeIndex].name}
+              listId={lists[routeIndex].id}
+              deleteList={deleteList}
+            />
+          }
+        ></Route>
+      </Routes> */}
     </div>
   );
 }

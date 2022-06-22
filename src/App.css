@@ -1,3 +1,17 @@
+/* --middle-blue-green: #82d4bbff;
+--eton-blue: #82c09aff;
+--green-sheen: #82ac9fff;
+--light-slate-gray: #829298ff;
+--mountbatten-pink: #94778bff; */
+
+input {
+  margin: 8px;
+  border-radius: 4px;
+}
+button {
+  border: 0;
+}
+
 .App {
   display: flex;
   flex-direction: column;
@@ -6,9 +20,10 @@
 }
 
 .navbar {
-  border: 2px solid turquoise;
+  background-color: #94778bff;
   margin: 5px;
   width: fit-content;
+  border-radius: 8px;
 }
 
 .navbar__list {
@@ -16,8 +31,44 @@
   justify-content: center;
 }
 
+.navbar__button {
+  background-color: #829298ff;
+  margin: 2px;
+}
+
 .list {
-  border: 2px solid aqua;
+  background-color: #82ac9fff;
   margin: 5px;
   width: fit-content;
+  border-radius: 8px;
+}
+
+.control {
+  position: relative !important;
+}
+
+.control__close {
+  position: absolute !important;
+  right: -7px;
+  top: -29px;
+}
+
+.control__radiobutton {
+  accent-color: #94778bff;
+}
+.item {
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  background-color: #82c09aff;
+  cursor: move;
+  border-radius: 8px;
+}
+
+.item__checkbox {
+  accent-color: #94778bff;
+}
+
+.item__close {
+  position: absolute;
+  right: 1rem;
 }
