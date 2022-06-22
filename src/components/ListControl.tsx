@@ -1,5 +1,11 @@
 import { useState } from 'react';
-// import AlertDialog from './Alert';
+
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 interface IListControlProps {
   listName: string;
@@ -15,18 +21,44 @@ const ListControl = ({
   deleteList,
 }: IListControlProps) => {
   const [text, setText] = useState('');
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleAgree = () => {
+    deleteList(listName);
+    setOpen(false);
+  };
 
   return (
     <>
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          // <AlertDialog />;
-          deleteList(listName);
-        }}
+      <button onClick={handleClickOpen}>X</button>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
       >
-        X
-      </button>
+        <DialogTitle id="alert-dialog-title">
+          {'This list will be deleted'}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>No</Button>
+          <Button onClick={handleAgree} autoFocus>
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
       <h1>{listName}</h1>
       <form>
         <input
