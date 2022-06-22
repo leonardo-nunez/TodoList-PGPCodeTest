@@ -46,24 +46,38 @@ function App() {
         addList={addList}
         setRouteIndex={setRouteIndex}
       />
-      {lists !== [] && (
-        <Routes>
-          {/* {lists.map((list, index) => ( */}
+      <Routes>
+        {lists.map((list, index) => (
           <Route
-            // key={index}
-            path={`lists/${lists[routeIndex].name}`}
+            key={index}
+            path={`lists/${list.name}`}
             element={
               <List
-                listName={lists[routeIndex].name}
-                listId={lists[routeIndex].id}
+                listName={list.name}
+                listId={list.id}
                 deleteList={deleteList}
                 updateListTodos={updateListTodos}
               />
             }
           ></Route>
-          {/* ))} */}
-        </Routes>
-      )}
+        ))}
+      </Routes>
+      <Routes>
+        {lists.map((list, index) => (
+          <Route
+            key={index}
+            path={`lists/${list.name}`}
+            element={
+              <List
+                listName={list.name}
+                listId={list.id}
+                deleteList={deleteList}
+                updateListTodos={updateListTodos}
+              />
+            }
+          ></Route>
+        ))}
+      </Routes>
     </div>
   );
 }
