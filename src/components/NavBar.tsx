@@ -31,7 +31,7 @@ const NavBar = ({
       <form>
         <input
           type="text"
-          placeholder="Add new List"
+          placeholder="Add new list"
           value={newListName}
           required
           onChange={(e) => setNewListName(e.target.value)}

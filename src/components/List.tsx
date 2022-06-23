@@ -22,20 +22,13 @@ const List = ({
   const [view, setView] = useState('all');
 
   useEffect(() => {
-    // setLists(prev => {
-    //   const filtered = prev.filter((l) => l.id !== listId);
-    //   const thisList = prev.filter((l) => l.id === listId);
-    //   const thisListUpdated = {...thisList, todos: todos}
-    //       return [...filtered, thisListUpdated ];
-
-    // })
-
     const newLists = lists.map((list) => {
       if (list.id === listId) {
         return { ...list, todos: todos };
       }
       return list;
     });
+
     setLists(newLists);
   }, [todos]); // eslint-disable-line
 

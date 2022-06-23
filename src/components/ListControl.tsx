@@ -69,7 +69,7 @@ const ListControl = ({
       <form>
         <input
           type="text"
-          placeholder="Add Todo"
+          placeholder="Add todo"
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
