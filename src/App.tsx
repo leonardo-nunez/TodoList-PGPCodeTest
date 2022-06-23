@@ -6,6 +6,13 @@ import NavBar from './components/NavBar';
 
 import './App.css';
 
+// const initialList = [
+//   {
+//     id: 1,
+//     name: 'first List',
+//   },
+// ];
+
 function App() {
   const [lists, setLists] = useState<IList[]>([]);
   const [newListName, setNewListName] = useState('');
@@ -53,8 +60,6 @@ function App() {
               listName={lists[routeIndex].name}
               listId={lists[routeIndex].id}
               deleteList={deleteList}
-              lists={lists}
-              setLists={setLists}
             />
           }
         ></Route>
