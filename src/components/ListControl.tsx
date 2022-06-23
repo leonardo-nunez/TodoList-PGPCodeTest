@@ -89,28 +89,30 @@ const ListControl = ({
           todoView(e.target.value)
         }
       >
-        <input
-          className="control__radiobutton"
-          type="radio"
-          value="all"
-          name="view"
-          defaultChecked
-        />{' '}
-        All
-        <input
-          className="control__radiobutton"
-          type="radio"
-          value="todo"
-          name="view"
-        />{' '}
-        To Do
-        <input
-          className="control__radiobutton"
-          type="radio"
-          value="done"
-          name="view"
-        />{' '}
-        Done
+        <form>
+          <input
+            className="control__radiobutton"
+            type="radio"
+            value="all"
+            name="view"
+            defaultChecked
+          />{' '}
+          All
+          <input
+            className="control__radiobutton"
+            type="radio"
+            value="todo"
+            name="view"
+          />{' '}
+          To Do
+          <input
+            className="control__radiobutton"
+            type="radio"
+            value="done"
+            name="view"
+          />{' '}
+          Done
+        </form>
       </div>
     </div>
   );

@@ -32,8 +32,9 @@ button {
 }
 
 .navbar__button {
-  background-color: #829298ff;
+  background-color: #82ac9fff;
   margin: 2px;
+  border-radius: 5px;
 }
 
 .list {
@@ -62,6 +63,10 @@ button {
   background-color: #82c09aff;
   cursor: move;
   border-radius: 8px;
+}
+
+.item__done {
+  background-color: #94778bff;
 }
 
 .item__checkbox {

@@ -98,7 +98,7 @@ const TodoItem = ({
 
   return (
     <div
-      className="item"
+      className={`item ${todo.complete && 'item__done'}`}
       ref={ref}
       style={{
         display:
