@@ -37,7 +37,7 @@ const List = ({
       return list;
     });
     setLists(newLists);
-  }, [todos]);
+  }, [todos]); // eslint-disable-line
 
   const moveCard = useCallback((dragIndex: number, hoverIndex: number) => {
     setTodos((prev: ITodo[]) =>
