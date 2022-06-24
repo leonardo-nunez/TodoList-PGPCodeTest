@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
 import List from './components/List';
@@ -6,17 +6,36 @@ import NavBar from './components/NavBar';
 
 import './App.css';
 
-// const initialList = [
-//   {
-//     id: 1,
-//     name: 'first List',
-//   },
-// ];
-
 function App() {
   const [lists, setLists] = useState<IList[]>([]);
   const [newListName, setNewListName] = useState('');
   const [routeIndex, setRouteIndex] = useState(0);
+
+  useEffect(() => {
+    const fetchLists = async () => {
+      const response = await fetch('http://localhost:3030/lists');
+      const data = await response.json();
+
+      setLists(data);
+    };
+
+    fetchLists();
+  }, []);
+
+  useEffect(() => {
+    const updateServer = async () => {
+      const options = {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(lists),
+      };
+      await fetch('http://localhost:3030/lists', options);
+    };
+    lists && updateServer();
+  }, [lists]);
 
   // let navigate = useNavigate();
 
