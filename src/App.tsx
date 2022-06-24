@@ -16,14 +16,14 @@ import './App.css';
 function App() {
   const [lists, setLists] = useState<IList[]>([]);
   const [newListName, setNewListName] = useState('');
-  const [routeIndex, setRouteIndex] = useState(0);
+  // const [routeIndex, setRouteIndex] = useState(0);
 
-  // let navigate = useNavigate();
+  let navigate = useNavigate();
 
   const addList: AddListType = (name: string) => {
     const newList = { id: Number(Date.now()), name, todos: [] };
     setLists([...lists, newList]);
-    // navigate(`lists/${newList.name}`);
+    navigate(`lists/${newList.name}`);
   };
 
   const deleteList: DeleteListType = (listName) => {
@@ -40,9 +40,9 @@ function App() {
         newListName={newListName}
         setNewListName={setNewListName}
         addList={addList}
-        setRouteIndex={setRouteIndex}
+        // setRouteIndex={setRouteIndex}
       />
-      {lists.map((list, index) => (
+      {/* {lists.map((list, index) => (
         <List
           key={index}
           listName={list.name}
@@ -51,7 +51,24 @@ function App() {
           lists={lists}
           setLists={setLists}
         />
-      ))}
+      ))} */}
+      <Routes>
+        {lists.map((list, index) => (
+          <Route
+            path={`lists/${list.name}`}
+            key={index}
+            element={
+              <List
+                listName={list.name}
+                listId={list.id}
+                deleteList={deleteList}
+                lists={lists}
+                setLists={setLists}
+              />
+            }
+          ></Route>
+        ))}
+      </Routes>
       {/* <Routes>
         <Route
           path={`lists/${lists[routeIndex].name}`}
