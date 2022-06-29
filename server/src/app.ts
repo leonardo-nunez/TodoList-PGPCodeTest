@@ -22,7 +22,7 @@ app.use(express.json());
 // app.use(express.static(path.join(__dirname, '../client/build')));
 
 app.get('/', (_req: Request, res: Response) => {
-  res.send('Hello World?!?!!!!!');
+  res.send('Hello World! BAM!');
 });
 
 app.get('/lists', async (_req: Request, res: Response) => {

@@ -21,7 +21,7 @@ app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 // app.use(express.static(path.join(__dirname, '../client/build')));
 app.get('/', (_req, res) => {
-    res.send('Hello World! BAM!');
+    res.send('Hello World?!?!!!!!');
 });
 app.get('/lists', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const data = yield (0, promises_1.readFile)('./data/lists.json');
@@ -31,7 +31,6 @@ app.get('/lists', (_req, res) => __awaiter(void 0, void 0, void 0, function* () 
 }));
 app.post('/lists', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log('POSTING!');
-    console.log(req.body);
     yield (0, promises_1.writeFile)('./data/lists.json', JSON.stringify(req.body));
     return res.status(200);
 }));
