@@ -22,6 +22,7 @@ function App() {
     fetchLists();
   }, []);
 
+  //update server
   useEffect(() => {
     const updateServer = async () => {
       const options = {
